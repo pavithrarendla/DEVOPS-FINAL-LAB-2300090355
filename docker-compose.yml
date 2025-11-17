@@ -1,0 +1,43 @@
+services:
+  mysqldb:
+    container_name: mysql-db
+    image: mysql:8
+    
+    environment:
+      MYSQL_ROOT_PASSWORD: exam
+      MYSQL_DATABASE: coursedb
+      # app.prop : Db = SDPDB-35
+      # MYSQL_USER: klu
+      # MYSQL_PASSWORD: klu
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql   # volume added here
+
+  backend:
+    container_name: 2300090355-final-backend
+    build:
+    
+      context: ./backend-springbootapp
+      dockerfile: ../DockerFullstack/backend.Dockerfile
+    image: 2300090355-final-backend
+    ports:
+      - "30031:7888" # edo okati testing 
+    depends_on:
+      - mysqldb
+    restart: on-failure
+
+  frontend:
+    container_name: 2300090355-final-frontend
+    build:
+      context: ./frontend-reactapp
+      dockerfile: ../DockerFullstack/frontend.Dockerfile
+    image: 2300090355-final-frontend
+    ports:
+      - "30031:80"
+    depends_on:
+      - backend
+
+# Declare volumes at the bottom
+volumes:
+  mysql-data:
