@@ -18,7 +18,7 @@ services:
     container_name: 2300090355-final-backend
     build:
     
-      context: ./backend-springbootapp
+      context: ./backend-springboot-app
       dockerfile: ../DockerFullstack/backend.Dockerfile
     image: 2300090355-final-backend
     ports:
@@ -30,7 +30,7 @@ services:
   frontend:
     container_name: 2300090355-final-frontend
     build:
-      context: ./frontend-reactapp
+      context: ./frontend-react-app
       dockerfile: ../DockerFullstack/frontend.Dockerfile
     image: 2300090355-final-frontend
     ports:
